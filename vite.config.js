@@ -10,11 +10,19 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/poll-dashboard.js',
+                // Ajout : entrypoint pour la page de vote via token
+                'resources/js/poll-vote.js',
             ],
             refresh: true,
         }),
         tailwindcss(),
     ],
+    // Ajout : alias @ pour pointer vers resources/js (utilisé dans les imports Vue)
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
     server: {
         host: true,
         hmr: {

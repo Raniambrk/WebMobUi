@@ -12,7 +12,7 @@
         data-props='@json([
             "polls" => $polls,
             "loginUrl" => route("login"),
-            "username" => "test name"
+            "username" => auth()->user()->username ?? ""
         ])'
     ></div>
 </x-vue-app-layout>

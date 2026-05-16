@@ -8,6 +8,33 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Poll extends Model
 {
+    // Ajout : liste des champs qu'on peut remplir via create() ou fill()
+    // Nécessaire pour éviter l'erreur MassAssignmentException
+    protected $fillable = [
+        'user_id',
+        'title',
+        'question',
+        'secret_token',
+        'is_draft',
+        'allow_multiple_choices',
+        'allow_vote_change',
+        'results_public',
+        'duration',
+        'started_at',
+        'ends_at',
+    ];
+
+    // Ajout : cast automatique des types pour que PHP retourne les bons types
+    // (boolean au lieu de 0/1, Carbon au lieu de string pour les dates)
+    protected $casts = [
+        'is_draft'               => 'boolean',
+        'allow_multiple_choices' => 'boolean',
+        'allow_vote_change'      => 'boolean',
+        'results_public'         => 'boolean',
+        'started_at'             => 'datetime',
+        'ends_at'                => 'datetime',
+    ];
+
     /**
      * Get the user that owns the poll.
      */

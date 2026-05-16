@@ -31,6 +31,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'login');
 });
 
+// Ajout : page de vote accessible via un token, sans connexion obligatoire
+// La vue Vue.js gère ensuite l'affichage selon si l'utilisateur est connecté ou non
+Route::get('/polls/vote/{token}', function (string $token) {
+    return view('polls.vote', ['token' => $token]);
+})->name('polls.vote');
+
 Route::middleware('auth')->group(function () {
     Route::get('/polls/dashboard', PollDashboardController::class)->name('polls.dashboard');
     Route::resource('posts', PostController::class)->except(['index', 'show']);
